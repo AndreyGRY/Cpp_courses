@@ -3,7 +3,7 @@ name: 'C++ CI'
 on:
   push:
     branches:
-      - main
+      - HW1_CICD
       - feature/github_actions
   workflow_dispatch:
 
