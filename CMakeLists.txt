@@ -9,9 +9,14 @@ find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in version.h)
 
-add_executable(helloworld_cli main.cpp)
+
+add_executable(helloworld_cli main.cpp extra_folder/extra.cpp)     # test source for extra build training, has no real effect
 add_library(helloworld lib.cpp)
 add_executable(test_version test_version.cpp)
+
+target_include_directories(helloworld_cli  # test folder for extra build training, has no real effect
+PUBLIC extra_folder/
+)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/andrey/works/webinar-cicd-main/test_version.cpp" "CMakeFiles/test_version.dir/test_version.cpp.o" "gcc" "CMakeFiles/test_version.dir/test_version.cpp.o.d"
+  "/home/andrey/works/HW1_CICD/Cpp_courses/test_version.cpp" "CMakeFiles/test_version.dir/test_version.cpp.o" "gcc" "CMakeFiles/test_version.dir/test_version.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

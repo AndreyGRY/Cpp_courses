@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/andrey/works/webinar-cicd-main/main.cpp" "CMakeFiles/helloworld_cli.dir/main.cpp.o" "gcc" "CMakeFiles/helloworld_cli.dir/main.cpp.o.d"
+  "/home/andrey/works/HW1_CICD/Cpp_courses/extra_folder/extra.cpp" "CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.o" "gcc" "CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.o.d"
+  "/home/andrey/works/HW1_CICD/Cpp_courses/main.cpp" "CMakeFiles/helloworld_cli.dir/main.cpp.o" "gcc" "CMakeFiles/helloworld_cli.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

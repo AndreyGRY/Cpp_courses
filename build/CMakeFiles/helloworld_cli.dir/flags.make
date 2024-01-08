@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/andrey/works/HW1_CICD/Cpp_courses/extra_folder
 
 CXX_FLAGS = -std=gnu++14 -Wall -Wextra -pedantic -Werror
 

@@ -57,10 +57,10 @@ RM = /snap/cmake/1361/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/andrey/works/webinar-cicd-main
+CMAKE_SOURCE_DIR = /home/andrey/works/HW1_CICD/Cpp_courses
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/andrey/works/webinar-cicd-main/build
+CMAKE_BINARY_DIR = /home/andrey/works/HW1_CICD/Cpp_courses/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	/snap/cmake/1361/bin/cpack --config ./CPackSourceConfig.cmake /home/andrey/works/webinar-cicd-main/build/CPackSourceConfig.cmake
+	/snap/cmake/1361/bin/cpack --config ./CPackSourceConfig.cmake /home/andrey/works/HW1_CICD/Cpp_courses/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -162,9 +162,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/andrey/works/webinar-cicd-main/build/CMakeFiles /home/andrey/works/webinar-cicd-main/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/andrey/works/HW1_CICD/Cpp_courses/build/CMakeFiles /home/andrey/works/HW1_CICD/Cpp_courses/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/andrey/works/webinar-cicd-main/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/andrey/works/HW1_CICD/Cpp_courses/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -229,6 +229,30 @@ test_version: cmake_check_build_system
 test_version/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_version.dir/build.make CMakeFiles/test_version.dir/build
 .PHONY : test_version/fast
+
+extra_folder/extra.o: extra_folder/extra.cpp.o
+.PHONY : extra_folder/extra.o
+
+# target to build an object file
+extra_folder/extra.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/helloworld_cli.dir/build.make CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.o
+.PHONY : extra_folder/extra.cpp.o
+
+extra_folder/extra.i: extra_folder/extra.cpp.i
+.PHONY : extra_folder/extra.i
+
+# target to preprocess a source file
+extra_folder/extra.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/helloworld_cli.dir/build.make CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.i
+.PHONY : extra_folder/extra.cpp.i
+
+extra_folder/extra.s: extra_folder/extra.cpp.s
+.PHONY : extra_folder/extra.s
+
+# target to generate assembly for a file
+extra_folder/extra.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/helloworld_cli.dir/build.make CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.s
+.PHONY : extra_folder/extra.cpp.s
 
 lib.o: lib.cpp.o
 .PHONY : lib.o
@@ -320,6 +344,9 @@ help:
 	@echo "... helloworld"
 	@echo "... helloworld_cli"
 	@echo "... test_version"
+	@echo "... extra_folder/extra.o"
+	@echo "... extra_folder/extra.i"
+	@echo "... extra_folder/extra.s"
 	@echo "... lib.o"
 	@echo "... lib.i"
 	@echo "... lib.s"

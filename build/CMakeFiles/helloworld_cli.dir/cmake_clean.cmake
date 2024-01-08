@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.o"
+  "CMakeFiles/helloworld_cli.dir/extra_folder/extra.cpp.o.d"
   "CMakeFiles/helloworld_cli.dir/main.cpp.o"
   "CMakeFiles/helloworld_cli.dir/main.cpp.o.d"
   "helloworld_cli"
