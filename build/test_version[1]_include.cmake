@@ -1,0 +1,5 @@
+if(EXISTS "/home/andrey/works/HW1_CICD/Cpp_courses/build/test_version[1]_tests.cmake")
+  include("/home/andrey/works/HW1_CICD/Cpp_courses/build/test_version[1]_tests.cmake")
+else()
+  add_test(test_version_NOT_BUILT test_version_NOT_BUILT)
+endif()

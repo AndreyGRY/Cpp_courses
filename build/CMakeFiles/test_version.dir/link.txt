@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/test_version.dir/test_version.cpp.o -o test_version  /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.71.0 libhelloworld.a 
+/usr/bin/c++ CMakeFiles/test_version.dir/test_version.cpp.o CMakeFiles/test_version.dir/extra_folder/extra.cpp.o -o test_version  lib/libgtest_main.a libhelloworld.a lib/libgtest.a -lpthread 

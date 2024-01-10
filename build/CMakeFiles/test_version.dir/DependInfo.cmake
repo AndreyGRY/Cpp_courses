@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/andrey/works/HW1_CICD/Cpp_courses/extra_folder/extra.cpp" "CMakeFiles/test_version.dir/extra_folder/extra.cpp.o" "gcc" "CMakeFiles/test_version.dir/extra_folder/extra.cpp.o.d"
   "/home/andrey/works/HW1_CICD/Cpp_courses/test_version.cpp" "CMakeFiles/test_version.dir/test_version.cpp.o" "gcc" "CMakeFiles/test_version.dir/test_version.cpp.o.d"
   )
 
