@@ -41,17 +41,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
-
-set(CPACK_GENERATOR DEB)
-
-set(CPACK_PACKAGE_VERSION_MAJOR 1)
-set(CPACK_PACKAGE_VERSION_MINOR 0)
-set(CPACK_PACKAGE_VERSION_PATCH 0)
-
-set(CPACK_PACKAGE_CONTACT example@example.com)
-
-include(CPack)
 
 
 # #enable_testing()
@@ -90,3 +79,16 @@ target_sources(test_ip_filter
 #    run_ip_filter)
 # EXTRA_ARGS "cat ./ip_filter.tsv | ")
 # gtest_add_tests(test_ip_filter "" AUTO)
+
+
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+set(CPACK_PACKAGE_VERSION_MAJOR 1)
+set(CPACK_PACKAGE_VERSION_MINOR 0)
+set(CPACK_PACKAGE_VERSION_PATCH 0)
+
+set(CPACK_PACKAGE_CONTACT example@example.com)
+
+include(CPack)
