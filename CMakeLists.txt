@@ -14,7 +14,7 @@ foreach(src_file ${SRC_FILES})
     add_executable(${target} ${src_file})
     list(APPEND TARGETS ${target})
     message("Target added: \"${target}\".")
-endforeach(src_file ${SRC_FILES})
+endforeach(src_file ${SRC_FILES}) 
 
 foreach(target ${TARGETS})
     target_compile_features(${target} PUBLIC cxx_std_14)
@@ -59,7 +59,7 @@ target_sources(test_ip_filter
     PRIVATE ip_filter.cpp    
     )
 
-# # Путь к входному файлу и исполняемому файлу
+# # for unit tests (disabled)
 # set(INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/ip_filter.tsv")
 # set(EXECUTABLE "${CMAKE_CURRENT_BINARY_DIR}/test_ip_filter.exe")
 
@@ -77,9 +77,9 @@ install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
-set(CPACK_PACKAGE_VERSION_MAJOR 0)
-set(CPACK_PACKAGE_VERSION_MINOR 0)
-set(CPACK_PACKAGE_VERSION_PATCH 20)
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 
 include(CPack)
