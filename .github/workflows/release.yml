@@ -15,11 +15,11 @@ jobs:
           submodules: true
       - name: Install gtest manually
         run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-     # - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+     # - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y # used GTest, not Boost
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
-      # - run: cmake --build . --target test_ip_filter
-      - run: cmake --build . --target package
+      # - run: cmake --build . --target test_ip_filter  # GTest disabled
+      - run: cmake --build . --target package -DPATCH_VERSION=${{ github.run_number }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
