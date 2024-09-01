@@ -32,6 +32,17 @@ foreach(target ${TARGETS})
 endforeach()
 
 
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+set(CPACK_PACKAGE_VERSION_MAJOR 0)
+set(CPACK_PACKAGE_VERSION_MINOR 0)
+set(CPACK_PACKAGE_VERSION_PATCH 2)
+set(CPACK_PACKAGE_CONTACT example@example.com)
+
+include(CPack)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -40,8 +51,6 @@ FetchContent_Declare(
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-
-
 
 # #enable_testing()
 
@@ -80,14 +89,3 @@ target_sources(test_ip_filter
 # EXTRA_ARGS "cat ./ip_filter.tsv | ")
 # gtest_add_tests(test_ip_filter "" AUTO)
 
-
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
-
-set(CPACK_GENERATOR DEB)
-
-set(CPACK_PACKAGE_VERSION_MAJOR 0)
-set(CPACK_PACKAGE_VERSION_MINOR 0)
-set(CPACK_PACKAGE_VERSION_PATCH 2)
-set(CPACK_PACKAGE_CONTACT example@example.com)
-
-include(CPack)
