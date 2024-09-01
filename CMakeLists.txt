@@ -32,17 +32,6 @@ foreach(target ${TARGETS})
 endforeach()
 
 
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
-
-set(CPACK_GENERATOR DEB)
-
-set(CPACK_PACKAGE_VERSION_MAJOR 0)
-set(CPACK_PACKAGE_VERSION_MINOR 0)
-set(CPACK_PACKAGE_VERSION_PATCH 2)
-set(CPACK_PACKAGE_CONTACT example@example.com)
-
-include(CPack)
-
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -81,6 +70,20 @@ target_sources(test_ip_filter
 #     COMMAND ${EXECUTABLE} < ${INPUT_FILE}
 #     COMMENT "Running ip_filter with input file"
 # )
+
+
+
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+set(CPACK_PACKAGE_VERSION_MAJOR 0)
+set(CPACK_PACKAGE_VERSION_MINOR 0)
+set(CPACK_PACKAGE_VERSION_PATCH 2)
+set(CPACK_PACKAGE_CONTACT example@example.com)
+
+include(CPack)
+
 
 #include(GoogleTest)
 #gtest_discover_tests(test_ip_filter) 
