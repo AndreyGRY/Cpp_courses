@@ -71,9 +71,6 @@ target_sources(test_ip_filter
 #     COMMENT "Running ip_filter with input file"
 # )
 
-
-
-include(CPack)
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
@@ -83,6 +80,7 @@ set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
 set(CPACK_PACKAGE_CONTACT example@example.com)
 
+include(CPack)
 
 
 #include(GoogleTest)
