@@ -1,3 +1,3 @@
 #pragma once
 
-/* #undef PROJECT_VERSION_PATCH */
+#define PROJECT_VERSION_PATCH 2
