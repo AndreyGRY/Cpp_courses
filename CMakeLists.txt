@@ -71,7 +71,6 @@ target_sources(test_ip_filter
 #     COMMENT "Running ip_filter with input file"
 # )
 
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
@@ -80,6 +79,8 @@ set(CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
 set(CPACK_PACKAGE_CONTACT example@example.com)
 
 set(CPACK_GENERATOR DEB)
+
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 include(CPack)
 
