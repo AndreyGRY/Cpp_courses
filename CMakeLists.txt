@@ -4,7 +4,8 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 project(02.cpp11and14 CXX)
 
 set(PATCH_VERSION "2" CACHE INTERNAL "Patch version")
-set(PROJECT_VESRION 0.0.${PATCH_VERSION})
+set(PROJECT_VESRION 0.0.2
+#${PATCH_VERSION})
 configure_file(version.h.in version.h)
 
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
