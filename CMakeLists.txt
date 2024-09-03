@@ -2,12 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 set(PATCH_VERSION "2" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.2})
-project(02.cpp11and14 CXX VERSION ${PROJECT_VESRION})
-
-set_target_properties(helloworld_cli helloworld test_version PROPERTIES
-    CXX_STANDARD 14
-    CXX_STANDARD_REQUIRED ON
-)
+project(02.cpp11and14 CXX VERSION ${PROJECT_VESRION} LANGUAGES NONE)
 
 #set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 #${PATCH_VERSION})
