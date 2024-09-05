@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
-
-set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
-project(02.cpp11and14 CXX)
+cmake_minimum_required(VERSION 3.10)
 
 set(PATCH_VERSION "2" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
+set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
+project(02.cpp11and14 LANGUAGES CXX VERSION ${PROJECT_VESRION})
 configure_file(version.h.in version.h)
 
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
@@ -14,7 +14,7 @@ foreach(src_file ${SRC_FILES})
     add_executable(${target} ${src_file})
     list(APPEND TARGETS ${target})
     message("Target added: \"${target}\".")
-endforeach(src_file ${SRC_FILES})
+endforeach(src_file ${SRC_FILES}) 
 
 foreach(target ${TARGETS})
     target_compile_features(${target} PUBLIC cxx_std_14)
@@ -33,7 +33,7 @@ endforeach()
 
 
 include(FetchContent)
-FetchContent_Declare(
+FetchContent_Declare( 
   googletest
   URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
@@ -41,19 +41,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-
-set(CPACK_GENERATOR DEB)
-
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
-
-set(CPACK_PACKAGE_CONTACT example@example.com)
-
-include(CPack)
-
-
-# #enable_testing()
+#enable_testing()
 
 add_executable(
   test_ip_filter
@@ -71,7 +59,7 @@ target_sources(test_ip_filter
     PRIVATE ip_filter.cpp    
     )
 
-# # Путь к входному файлу и исполняемому файлу
+# # for unit tests (disabled)
 # set(INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/ip_filter.tsv")
 # set(EXECUTABLE "${CMAKE_CURRENT_BINARY_DIR}/test_ip_filter.exe")
 
@@ -82,6 +70,18 @@ target_sources(test_ip_filter
 #     COMMAND ${EXECUTABLE} < ${INPUT_FILE}
 #     COMMENT "Running ip_filter with input file"
 # )
+
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH ${PATCH_VERSION})
+set(CPACK_PACKAGE_CONTACT example@example.com)
+
+include(CPack)
+
 
 #include(GoogleTest)
 #gtest_discover_tests(test_ip_filter) 

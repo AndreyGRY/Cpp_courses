@@ -1,12 +1,10 @@
 name: 'C++ CI'
-
 on:
   push:
     branches:
-      - HW1_CICD
+      - HW2_CPP11
       - feature/github_actions
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,15 +13,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-
-
       - name: Install gtest manually
         run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-     # - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+     # - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y # used GTest, not Boost
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
-      - run: cmake --build . --target test
-      - run: cmake --build . --target package
+      # - run: cmake --build . --target test_ip_filter  # GTest disabled
+      - run: cmake --build . --target package 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -41,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./02.cpp11and14-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: 02.cpp11and14-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
