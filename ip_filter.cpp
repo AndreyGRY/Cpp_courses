@@ -8,8 +8,15 @@
 
  #include "ip_filter.h"
 
-#define UNUSED(variable) (void)variable
-#define COLUMNS_NUMBER  4 //  number of fields in ip address
+//Corrected
+//#define UNUSED(variable) (void)variable
+//#define COLUMNS_NUMBER  4 //  number of fields in ip address
+static const int COLUMNS_NUMBER = 4;
+static const int TEST_STRINGS_NUMBER = 1000;    //using for memory optimization of ip pool array
+using vec_str = std::vector<std::string>;
+using vec_str_2D = std::vector<std::vector<std::string>>;
+using vec_int = std::vector<int>;
+using vec_int_2D = std::vector<std::vector<int>>;
 
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
@@ -17,9 +24,12 @@
 // ("11.", '.') -> ["11", ""]
 // (".11", '.') -> ["", "11"]
 // ("11.22", '.') -> ["11", "22"]
-std::vector<std::string> split(const std::string &str, char d)
+vec_str split(const std::string &str, char d)
 {
-    std::vector<std::string> r;
+        // Corrected - memory optimization of ip pool array
+
+    vec_str r;
+    r.reserve(COLUMNS_NUMBER);
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -37,13 +47,28 @@ std::vector<std::string> split(const std::string &str, char d)
 }
 
 
-void convert_to_int(std::vector<std::vector<std::string>> *_ip_pool, std::vector<std::vector<int>> *_intVec)
+void convert_to_int(vec_str_2D *_ip_pool, vec_int_2D *_intVec)
 {
-    std::vector<std::vector<std::string>> __ip_pool= *_ip_pool;
+                // Corrected - check pointers
+
+    if (!_ip_pool || !_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_ip_pool->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
+    vec_str_2D __ip_pool= *_ip_pool;
 
     for (size_t i=0; i<__ip_pool.size(); i++)
     {
-        std::vector<int> _intRow;
+                // Corrected - memory optimization of ip pool array
+
+        vec_int _intRow;
+        _intRow.reserve(COLUMNS_NUMBER);
+
         for (size_t j=0; j<__ip_pool[i].size(); j++)
         {
             _intRow.push_back(std::stoi(__ip_pool[i][j]));
@@ -52,18 +77,40 @@ void convert_to_int(std::vector<std::vector<std::string>> *_ip_pool, std::vector
     }
 }
 
-void ip_sort(std::vector<std::vector<int>> *_intVec)
+void ip_sort(vec_int_2D *_intVec)
 {
+                    // Corrected - check pointers
+
+    if (!_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_intVec->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
     std::sort(_intVec->begin(), _intVec->end(),
     [](const auto& v1, const auto& v2) 
     { return v1 > v2; });
 }
 
-void out_sorted(std::vector<std::vector<int>> *_intVec)
+void out_sorted(vec_int_2D *_intVec)
 {
-    for(std::vector<std::vector<int> >::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
+                        // Corrected - check pointers
+
+    if (!_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_intVec->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
+    for(auto ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
     {
-        for(std::vector<int>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
+        for(auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
         {
             if (ip_part != ip->cbegin())
             {
@@ -75,11 +122,22 @@ void out_sorted(std::vector<std::vector<int>> *_intVec)
     }
 }
 
-void out_sorted(std::vector<std::vector<int>> *_intVec, int byte_1st)
+void out_sorted(vec_int_2D *_intVec, int byte_1st)
 {
-    for(std::vector<std::vector<int> >::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
+                        // Corrected - check pointers
+
+    if (!_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_intVec->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
+    for(vec_int_2D::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
     {
-        for(std::vector<int>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
+        for(vec_int::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
         {
             if (*ip->cbegin() == byte_1st)
             {
@@ -100,11 +158,22 @@ void out_sorted(std::vector<std::vector<int>> *_intVec, int byte_1st)
     }
 }
 
-void out_sorted(std::vector<std::vector<int>> *_intVec, int byte_1st, int byte_2st)
+void out_sorted(vec_int_2D *_intVec, int byte_1st, int byte_2st)
 {
-    for(std::vector<std::vector<int> >::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
+                        // Corrected - check pointers
+
+    if (!_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_intVec->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
+    for(vec_int_2D::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
     {
-        for(std::vector<int>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
+        for(vec_int::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
         {
             if (*ip->cbegin() == byte_1st && *(ip->cbegin() + 1) == byte_2st)
             {
@@ -124,13 +193,23 @@ void out_sorted(std::vector<std::vector<int>> *_intVec, int byte_1st, int byte_2
         }
     }
 }
-
-void out_sorted_any(std::vector<std::vector<int>> *_intVec, int byte)
+ 
+void out_sorted_any(vec_int_2D *_intVec, int byte)
 {
+                        // Corrected - check pointers
+    if (!_intVec) {
+        std::cerr << "Error: Null pointer" << std::endl;
+        return; 
+    }
+    if (_intVec->empty() ) {
+        std::cerr << "Error: Empty input vector" << std::endl;
+        return;
+    }
+
     bool filter_condition = false;
-    for(std::vector<std::vector<int> >::const_iterator ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
+    for(auto ip = _intVec->cbegin(); ip != _intVec->cend(); ++ip)
     {
-        for(std::vector<int>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
+        for(auto ip_part = ip->cbegin(); ip_part != ip->cend() + 1; ++ip_part)
         {
             if (filter_condition == true)
             {
@@ -160,22 +239,27 @@ void out_sorted_any(std::vector<std::vector<int>> *_intVec, int byte)
     }
 }
 
-int main(int argc, char const *argv[])
+int main(int __attribute__((unused)) argc, char const __attribute__((unused)) *argv[])
 {
      try
     {
-        std::vector<std::vector<std::string>> ip_pool;
+           // Corrected - memory optimization of ip pool array
 
+        vec_str_2D ip_pool;
+        ip_pool.reserve(TEST_STRINGS_NUMBER);
         for(std::string line; std::getline(std::cin, line);)
         {
-            std::vector<std::string> v = split(line, '\t');
+            vec_str v;
+            v.reserve(COLUMNS_NUMBER);            
+            v = split(line, '\t'); 
             ip_pool.push_back(split(v.at(0), '.'));
         }
-
+     
         // ! On Windows stoi() doesn't work properly on [0][0]'st element,
         // however cout() prints valid "113" value (?). Working good on Linux.
 
-        std::vector<std::vector<int>> intVec;
+        vec_int_2D intVec;
+        intVec.reserve(TEST_STRINGS_NUMBER);
 
         // TODO reverse lexicographically sort
 
@@ -251,8 +335,9 @@ int main(int argc, char const *argv[])
         // 39.46.86.85
         // 5.189.203.46
 
-        UNUSED(argc);
-        UNUSED(argv);
+     // Corrected
+        //UNUSED(argc);
+        //UNUSED(argv);
     }
     catch(const std::exception &e)
     {
